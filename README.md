@@ -1,7 +1,7 @@
-eopl3
+EOPL3
 =====
 
-the exercise solution code of the ESSENTIALS OF PROGRAMMING LANGUAGES (EOPL3) book
+Essentials Of Programming Languages, EOPL3 
 
 License
 -------

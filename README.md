@@ -1,4 +1,4 @@
-Exercises when reading EOPL3 book
+Exercises completed when reading EOPL3 book
 =================================
 
 Some exercises that need program is implemented using scheme programming language.

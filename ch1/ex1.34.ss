@@ -22,27 +22,20 @@
 (lson abst)
 (rson abst)
 
-
+;; idea: if the subtree of bst contains n,
+;; then append #t on the head of returned list, otherwise append #f.
 (define (path n bst)
-  (cdr (path-search n bst)))
+  (let ([result (path-search n bst)])
+    (if (car result)            ;;contains n
+        (cdr (path-search n bst))
+        null)))
 
 (define (path-search n bst)
-  (if (leaf? bst)
-      (if (= n bst)
-          #t)
+  (if (null? bst)
+      null
       (if (= n (root bst))
-          '()
-          )))
+          #t
+          (path-search n ()))))
 
-;; return whether or not exists n in bst
-(define (deep-first-explore bst n)
-  (if (= n (root bst))
-      #t
-      ())
-  (let
-      ([left (deep-first-explore (lson bintree) count)])
-    (list (contents-of bintree)
-          left
-          (deep-first-explore (rson bintree) (max-number left))))))
 ;; todo
-(path 17 )
+(path 17 abst)

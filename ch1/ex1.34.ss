@@ -32,10 +32,14 @@
 
 (define (path-search n bst)
   (if (null? bst)
-      null
+      (cons #f null)
       (if (= n (root bst))
-          #t
-          (path-search n ()))))
+          (cons #t null)
+          (let ([left-result (path-search n (lson bst))]
+                [right-result (path-search n (rson bst))])
+            (cond [(car left-result) (cons #t (cons 'left (cdr left-result)))]
+                  [(car right-result) (cons #t (cons 'right (cdr right-result)))]
+                  [else (cons #f null)])))))
 
 ;; todo
 (path 17 abst)

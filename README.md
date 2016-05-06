@@ -1,5 +1,15 @@
+Exercises when reading EOPL3 book
+=================================
+
+Some exercises that need program is implemented using scheme programming language.
+
+Tool for programming
+--------------------
+
+The DrRacket is recommended to write scheme code, which can be downloaded [here](https://download.racket-lang.org/).
+
 EOPL3
-=====
+-----
 
 Essentials Of Programming Languages, EOPL3 
 

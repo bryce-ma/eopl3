@@ -6,7 +6,7 @@ Some exercises that need program is implemented using scheme programming languag
 EOPL3
 -----
 
-Essentials Of Programming Languages, EOPL3 
+Essentials Of Programming Languages: 3rd edition, EOPL3
 
 Tool for programming
 --------------------

@@ -18,9 +18,6 @@
                   (26 (20 (17 () ())
                           ())
                       (31 () ()))))
-;;test
-(lson abst)
-(rson abst)
 
 ;; idea: if the subtree of bst contains n,
 ;; then append #t on the head of returned list, otherwise append #f.
@@ -41,5 +38,6 @@
                   [(car right-result) (cons #t (cons 'right (cdr right-result)))]
                   [else (cons #f null)])))))
 
-;; todo
+;; test
 (path 17 abst)
+;; => (right left left)

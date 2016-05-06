@@ -1,7 +1,7 @@
 #lang scheme
 
 (require  "ex1.31-bintree.ss")
-;; ex1.34
+;; ex1.35
 ;; must explore the left son of the tree first
 (define (number-leaves bintree)
   (deep-first-explore bintree -1))
@@ -10,7 +10,7 @@
   (if (leaf? bintree)
       (+ 1 count)   ;; only increment when encounter leaves
       (let
-          ([left (deep-first-explore (lson bintree) count)])
+          ([left (deep-first-explore (lson bintree) count)])  ;;explore the left subtree first
         (list (contents-of bintree)
               left
               (deep-first-explore (rson bintree) (max-number left))))))

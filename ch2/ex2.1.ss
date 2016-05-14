@@ -36,7 +36,7 @@
                       (if (>= (+ (car x) (car y)) N)  
                           (add-bigit (cons (+ 1 (if (null? (cdr x))  ;;需要进位 overflow happens, so need to augment the higher bit. x = (8 2 3) would become (3 3)
                                                     0
-                                                    (caar x)))
+                                                    (cadr x)))
                                            (if (null? (cdr x))
                                                null
                                                (cddr x)))
@@ -82,15 +82,14 @@
 (number-bigit 258)
 ;; => (2 0 1)
 
-
-
 (define fact
   (lambda (x)
     (define fact-bigit
       (lambda (x-bigit)
         (if (is-zero? x-bigit)
             one
-            (multiply-bigit x (fact-bigit (predecessor x-bigit))))))
+            (multiply-bigit x-bigit (fact-bigit (predecessor x-bigit))))))
     (bigit-number (fact-bigit (number-bigit x)))))
 
 (fact 10)
+;; 3628800

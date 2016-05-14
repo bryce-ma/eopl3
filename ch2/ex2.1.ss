@@ -93,3 +93,8 @@
 
 (fact 10)
 ;; 3628800
+
+;; running time
+(map (lambda (x) (time (fact x))) (list 50 100 150 200 250 300) )
+
+

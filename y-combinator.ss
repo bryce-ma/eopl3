@@ -12,7 +12,7 @@
           (if (= 0 x) 1 (* x (g (- x 1)))))) (self self)))))
 
 ;; cannot terminate because of call-by-value, why?
-
+;; call-by-value will evaluate (self self) first and this will result to itself that contains (self self), then forever loop
 
 ;; 1*2*3*4 = 24
 (fact 4)

@@ -37,3 +37,19 @@
 (display e)
 (newline)
 (apply-env e 'y)
+
+;; exercise 2.8
+(define empty-env?
+  (lambda (env)
+    (null? env)))
+
+;; exercise 2.9
+(define has-binding?
+  (lambda (env s)
+    (if (empty-env? env)
+        #f
+        (let ([saved-var (caar env)]
+              [saved-env (cdr env)])
+          (if (eqv? saved-var s)
+              #t
+              (has-binding? saved-env s))))))

@@ -17,7 +17,7 @@
     (if (null? env)
         (report-no-binding-found search-var)
         (let ([saved-var (caar env)]
-              [saved-val (cadr env)]
+              [saved-val (cdar env)]
               [saved-env (cdr env)])
           (if (eqv? saved-var search-var)
               saved-val

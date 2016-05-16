@@ -29,12 +29,12 @@
 |#
 
 (define fact0
-  ((lambda (f)  ;; abstract to any function f
+  ((lambda (f)                             ;; abstract to any function f
     ((lambda (u) (u u))
      (lambda (self)
        (f
         (lambda (v) ((self self) v))))))
-  (lambda (g)     ;; the specific function f, in this example, this is factorial
+  (lambda (g)                              ;; the specific function f, in this example, this is factorial
         (lambda (x)
           (if (= 0 x) 1 (* x (g (- x 1))))))))
 

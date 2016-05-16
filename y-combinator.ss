@@ -1,9 +1,11 @@
 #lang scheme
 
+;; the recursive version of factorial
 (define fact
   (lambda (x)
     (if (= 0 x) 1 (* x (fact (- x 1))))))
 
+;; later process of inventing Y combinator is inspired by Yin Wang's idea
 #|
 (define fact0
   ((lambda (u) (u u))
@@ -29,16 +31,50 @@
 |#
 
 (define fact0
-  ((lambda (f)                             ;; abstract to any function f
-    ((lambda (u) (u u))
-     (lambda (self)
-       (f
-        (lambda (v) ((self self) v))))))
-  (lambda (g)                              ;; the specific function f, in this example, this is factorial
-        (lambda (x)
-          (if (= 0 x) 1 (* x (g (- x 1))))))))
+  ((lambda (f)                             ;; abstract to any function f             ;; the Y combinator 
+     ((lambda (u) (u u))
+      (lambda (self)
+        (f
+         (lambda (v) ((self self) v))))))
+   (lambda (g)      ;; the specific function f, for this example, this is factorial   ;; apply this to Y combinator above
+     (lambda (x)
+       (if (= 0 x) 1 (* x (g (- x 1))))))))
 
 
 ;; 1*2*3*4 = 24
 (fact 4)
 (fact0  4)
+
+;; using Y combinator to create even and odd function 
+#|
+(define even
+  (lambda (x)
+    (cond
+     [(zero? x) #t]
+     [(= 1 x) #f]
+     [else (odd (sub1 x))])))
+ 
+(define odd
+  (lambda (x)
+    (cond
+     [(zero? x) #f]
+     [(= 1 x) #t]
+     [else (even (sub1 x))])))
+|#
+(even? 3)
+
+(lambda (odd)      ;;;  even
+  (lambda (x)
+    (cond
+      [(zero? x) #t]
+      [(= 1 x) #f]
+      [else (odd (sub1 x))])))
+
+
+(lambda (even)    ;;; odd
+  (lambda (x)
+    (cond
+      [(zero? x) #f]
+      [(= 1 x) #t]
+      [else (even (sub1 x))])))
+

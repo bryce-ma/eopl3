@@ -53,3 +53,15 @@
           (if (eqv? saved-var s)
               #t
               (has-binding? saved-env s))))))
+(length '(1 2 3))
+;; exercise 2.10
+(define extend-env*
+  (lambda (var-list val-list env)
+    (if (= (length var-list) (length val-list))
+        (if (= 0 (length var-list))
+            env
+            (extend-env* (cdr var-list) (cdr val-list) (extend-env (car var-list) (car val-list) env)))
+        (error 'extend-env* "var-list and val-list should be same length"))))
+;; test for ex2.10
+(extend-env* '(a b c) '(1 2 3) (empty-env))
+;; => ((c . 3) (b . 2) (a . 1))

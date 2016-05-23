@@ -12,12 +12,21 @@
   (lambda (env search-var)
     (if (null? env)
         (report-no-binding-found search-var)
-        (let ([saved-var (caar env)]
-              [saved-val (cdar env)]
+        (let ([saved-vars (caar env)]
+              [saved-vals (cadar env)]
               [saved-env (cdr env)])
-          (if (eqv? saved-var search-var)
-              saved-val
-              (apply-env saved-env search-var))))))
+          (let ([search-result (search-in-pair search-var saved-vars saved-vals)])
+            (if (null? search-result)
+                (apply-env saved-env search-var)
+                search-result))))))
+
+(define search-in-pair
+  (lambda (var list1 list2)
+    (if (empty? list1)
+        null
+        (if (eqv? var (car list1))
+            (car list2)
+            (search-in-pair var (cdr list1) (cdr list2))))))
 
 (define report-no-binding-found
   (lambda (search-var)
@@ -28,7 +37,9 @@
     (extend-env var-list (list val-list) env)))
 
 (define test-env
-  (extend-env* '(a b c) '(1 2 3) (extend-env 'm 5 (empty-env))))
+  (extend-env* '(a b c) '(1 2 3) (extend-env* (list 'm) (list 5) (empty-env))))
+(display test-env)
+(newline)
 (apply-env test-env 'm)
 ;; => 5
 (apply-env test-env 'b)

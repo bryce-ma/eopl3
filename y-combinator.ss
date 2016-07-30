@@ -78,3 +78,18 @@
       [(= 1 x) #t]
       [else (even (sub1 x))])))
 
+
+;; from "why of Y?" -----------------------------------------
+(let ((f (lambda (q) (lambda (n) (if (< n 2) 1 (* n (q (- n 1))))))))
+  (let ((g (lambda (h) (lambda (n) ((f (h h)) n)))))
+    ((g g) 10)))
+
+(define Y (lambda (f)
+            (let ((g (lambda (h)
+                       (lambda (x) ((f (h h)) x)))))
+              (g g))))
+
+((Y (lambda (q) (lambda (n) (if (< n 2) 1 (* n (q (- n 1))))))) 10)
+
+((Y (lambda (q) (lambda (n) (if (empty? n) 0 (+ 1 (q (cdr n))))))) (list 10 11))
+
